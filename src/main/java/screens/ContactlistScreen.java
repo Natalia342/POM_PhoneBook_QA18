@@ -21,11 +21,13 @@ public class ContactlistScreen extends BaseScreen{
     MobileElement plusButton;
 
     public boolean isContactListActivityPresent(){
-        return shouldHave(activityViewText, "Contact list",5);
+        return shouldHave(activityViewText, "Contact list",10);
     }
     public AuthenticationScreen logout(){
-        moreOptions.click();
+        if(activityViewText.getText().equals("Contact list")) {
+        moreOptions.click();//написано в BaseScreen shouldHawe можно пременить если не успевает отрисоваться
         logoutButton.click();
+        }
         return new AuthenticationScreen(driver);
     }
 }

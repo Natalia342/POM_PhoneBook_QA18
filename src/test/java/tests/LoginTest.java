@@ -31,6 +31,34 @@ public class LoginTest extends AppiumConfig {
                 .isContactListActivityPresent();
         Assert.assertTrue(res);
     }
+    @Test
+    public void LoginWrongEmail(){
+                new SplashScreen(driver)
+                .gotoAuthenticationScreen()
+                .login(Auth.builder()
+                        .email("vasiatalgmail.com")
+                        .password("Vasia$1234")
+                        .build())
+                        .isErrorMessageText("Error")
+                        .clean();
+     //          .isContactListActivityPresent();
+
+
+    }
+    @Test
+    public void LoginWrongPassword(){
+        new SplashScreen(driver)
+                .gotoAuthenticationScreen()
+                .login(Auth.builder()
+                        .email("vasiatal@gmail.com")
+                        .password("Vasi1234")
+                        .build())
+                .isErrorMessageText("Error")
+                .clean();
+        //          .isContactListActivityPresent();
+
+
+    }
 
     @AfterMethod
     public void postCondition(){
