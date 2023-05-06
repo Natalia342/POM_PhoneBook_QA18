@@ -55,7 +55,7 @@ public class RegistrationTest extends AppiumConfig {
     }
 
     @AfterMethod
-    public void preCondition() {
+    public void postCondition() {
         new ContactlistScreen(driver).logout();
         new SplashScreen(driver);
     }
