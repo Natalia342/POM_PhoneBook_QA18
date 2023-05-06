@@ -20,8 +20,9 @@ public class BaseScreen {
     public void type(MobileElement element,String text){
         if (text == null) return;
         element.click();
-        waitElement(element, 5);////////////падал логин тестс
+        //waitElement(element, 5);////////////падал логин тестс
         element.clear();
+        waitElement(element, 5);////////////падал логин тестс
         element.sendKeys(text);
 
     }
@@ -43,14 +44,7 @@ public class BaseScreen {
 
     }
 
-    public  AuthenticationScreen isErrorMessageText(String text) {
-        Alert alert = new WebDriverWait(driver,5)
-                .until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert();//переключаемся на сообщение об алерте
-        Assert.assertTrue(alert.getText().contains(text));
-        alert.accept();//закрытие алерта
-        return new AuthenticationScreen(driver);
-    }
+
  /*   public boolean isErrorMessageText(){
         Alert alert = new WebDriverWait(driver,10)
                 .until(ExpectedConditions.alertIsPresent());
