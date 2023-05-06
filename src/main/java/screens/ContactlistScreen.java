@@ -21,6 +21,7 @@ public class ContactlistScreen extends BaseScreen{
     MobileElement plusButton;
 
     public boolean isContactListActivityPresent(){
+
         return shouldHave(activityViewText, "Contact list",10);
     }
     public AuthenticationScreen logout(){

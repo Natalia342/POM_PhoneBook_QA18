@@ -16,43 +16,46 @@ import screens.SplashScreen;
 public class RegistrationTest extends AppiumConfig {
 
     @Test
-    public void RegistrationSuccess(){
-        int i = (int)(System.currentTimeMillis() / 1000) % 3600;
+    public void RegistrationSuccess() {
+        int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         boolean res = new SplashScreen(driver)
                 .gotoAuthenticationScreen()
                 .registration(Auth.builder()
-                        .email("vasiatal"+ i+ "@gmail.com")
-                        .password("Vasia$"+i+"34")
+                        .email("vasiatal" + i + "@gmail.com")
+                        .password("Vasia$" + i + "34")
                         .build())
                 .isContactListActivityPresent();
-                 Assert.assertTrue(res);
+        Assert.assertTrue(res);
     }
+
     @Test
-    public void WrongEmailRegistration(){
-        int i = (int)(System.currentTimeMillis() / 1000) % 3600;
+    public void WrongEmailRegistration() {
+        int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         new SplashScreen(driver)
                 .gotoAuthenticationScreen()
-                .registration(Auth.builder()
-                        .email("vasiatal"+ i+ "gmail.com")
-                        .password("Vasia$"+i+"34")
-                        .build())
-                        .isErrorMessageText("Error")
-                        .clean();
-    }
-    @Test
-    public void WrongPasswordRegistration(){
-        int i = (int)(System.currentTimeMillis() / 1000) % 3600;
-        new SplashScreen(driver)
-                .gotoAuthenticationScreen()
-                .registration(Auth.builder()
-                        .email("vasiatal"+ i+ "@gmail.com")
-                        .password("Vasia"+i+"34")
+                .registrationWrong(Auth.builder()
+                        .email("vasiatal" + i + "gmail.com")
+                        .password("Vasia$" + i + "34")
                         .build())
                 .isErrorMessageText("Error")
                 .clean();
     }
+
+    @Test
+    public void WrongPasswordRegistration() {
+        int i = (int) (System.currentTimeMillis() / 1000) % 3600;
+        new SplashScreen(driver)
+                .gotoAuthenticationScreen()
+                .registrationWrong(Auth.builder()
+                        .email("vasiatal" + i + "@gmail.com")
+                        .password("Vasia" + i + "34")
+                        .build())
+                .isErrorMessageText("Error")
+                .clean();
+    }
+
     @AfterMethod
-    public void preCondition(){
+    public void preCondition() {
         new ContactlistScreen(driver).logout();
         new SplashScreen(driver);
     }

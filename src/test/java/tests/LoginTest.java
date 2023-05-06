@@ -17,7 +17,7 @@ public class LoginTest extends AppiumConfig {
                 .fillEmail("vasiatal@gmail.com")
                 .fillPassword("Vasia$1234")
                 .submitLogin()
-                .isContactListActivityPresent();
+                .isContactListActivityPresent();//method s boolean znacheni b ctp 15 poetomy peremenay boolean
         Assert.assertTrue(res);
     }
     @Test
@@ -35,7 +35,7 @@ public class LoginTest extends AppiumConfig {
     public void LoginWrongEmail(){
                 new SplashScreen(driver)
                 .gotoAuthenticationScreen()
-                .login(Auth.builder()
+                .loginWrong(Auth.builder()
                         .email("vasiatalgmail.com")
                         .password("Vasia$1234")
                         .build())
@@ -49,7 +49,7 @@ public class LoginTest extends AppiumConfig {
     public void LoginWrongPassword(){
         new SplashScreen(driver)
                 .gotoAuthenticationScreen()
-                .login(Auth.builder()
+                .loginWrong(Auth.builder()
                         .email("vasiatal@gmail.com")
                         .password("Vasi1234")
                         .build())

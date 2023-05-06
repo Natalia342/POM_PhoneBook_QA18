@@ -40,12 +40,26 @@ public class AuthenticationScreen extends BaseScreen{
         loginButton.click();
         return new ContactlistScreen(driver);
     }
+    public AuthenticationScreen loginWrong(Auth auth){
+        waitElement(emailEditText,5);
+        type(emailEditText, auth.getEmail());
+        type(passwordEditText,auth.getPassword());
+        loginButton.click();
+        return this;
+    }
     public ContactlistScreen registration(Auth auth){
         waitElement(emailEditText,5);
         type(emailEditText, auth.getEmail());
         type(passwordEditText,auth.getPassword());
         registrationButton.click();
         return new ContactlistScreen(driver);
+    }
+    public AuthenticationScreen registrationWrong(Auth auth){
+        waitElement(emailEditText,5);
+        type(emailEditText, auth.getEmail());
+        type(passwordEditText,auth.getPassword());
+        registrationButton.click();
+        return this;
     }
     public AuthenticationScreen clean(){
         emailEditText.clear();
