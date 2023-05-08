@@ -20,7 +20,7 @@ public class BaseScreen {
     public void type(MobileElement element,String text){
         if (text == null) return;
         element.click();
-        //waitElement(element, 5);////////////падал логин тестс
+        waitElement(element, 5);////////////падал логин тестс
         element.clear();
         waitElement(element, 5);////////////падал логин тестс
         element.sendKeys(text);

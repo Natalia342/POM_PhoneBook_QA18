@@ -53,7 +53,30 @@ public class RegistrationTest extends AppiumConfig {
                 .isErrorMessageText("Error")
                 .clean();
     }
+    @Test
+    public void WrongRegistrationEmptyEmail(){
+        int i = (int) (System.currentTimeMillis() / 1000) % 3600;
+        new SplashScreen(driver)
+                .gotoAuthenticationScreen()
+                .registrationWrong(Auth.builder()
 
+                        .password("Vasi"+ i + "34")
+                        .build())
+                .isErrorMessageText("Error")
+                .clean();
+    }
+    @Test(enabled = false)
+    public void WrongRegistrationEmptyPassword(){
+        int i = (int) (System.currentTimeMillis() / 1000) % 3600;
+        new SplashScreen(driver)
+                .gotoAuthenticationScreen()
+                .registrationWrong(Auth.builder()
+                        .email("vasi"+i+"@gmail.com")
+
+                        .build())
+                .isErrorMessageTextWrongRegistrationEmptyPassword("Contact App has stopped")// ne podhodit
+        //        .clean()
+        ;}
     @AfterMethod
     public void postCondition() {
         new ContactlistScreen(driver).logout();

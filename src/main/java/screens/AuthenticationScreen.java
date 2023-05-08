@@ -24,6 +24,9 @@ public class AuthenticationScreen extends BaseScreen{
     @FindBy (id="com.sheygam.contactapp:id/regBtn")
     MobileElement registrationButton;
 
+    @FindBy(id = "android:id/aerr_restart")
+    MobileElement clickAlert;
+
     public AuthenticationScreen fillEmail(String email){
          waitElement(emailEditText, 5);
          type(emailEditText,email);
@@ -77,5 +80,17 @@ public class AuthenticationScreen extends BaseScreen{
         Assert.assertTrue(alert.getText().contains(text));
         alert.accept();//закрытие алерта
         return this; //new AuthenticationScreen(driver);
+    }
+    public  AuthenticationScreen isErrorMessageTextWrongRegistrationEmptyPassword(String text) {
+        Alert alert = new WebDriverWait(driver,5)
+                .until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert();//переключаемся на сообщение об алерте
+        Assert.assertTrue(alert.getText().contains(text));
+        pause(5);
+        clickAlert.click();
+    //    alert.accept();//закрытие алерта
+        pause(5);
+        driver.navigate().back();
+        return new AuthenticationScreen(driver); //new AuthenticationScreen(driver);
     }
 }
