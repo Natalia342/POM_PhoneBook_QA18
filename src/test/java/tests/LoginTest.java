@@ -59,10 +59,31 @@ public class LoginTest extends AppiumConfig {
 
 
     }
+    @Test
+    public void LoginWrongEmptyEmail(){
+        new SplashScreen(driver)
+                .gotoAuthenticationScreen()
+                .loginWrong(Auth.builder()
 
-    @AfterMethod
-    public void postCondition(){
-        new ContactlistScreen(driver).logout();
-        new SplashScreen(driver);
+                        .password("Vasi1234")
+                        .build())
+                .isErrorMessageText("Error")
+                .clean();
     }
-}
+        @Test
+        public void LoginWrongEmptyPassword(){
+            new SplashScreen(driver)
+                    .gotoAuthenticationScreen()
+                    .loginWrong(Auth.builder()
+                            .email("vasiatal@gmail.com")
+
+                            .build())
+                    .isErrorMessageText("Error")
+                    .clean();}
+
+            @AfterMethod
+            public void postCondition() {
+                new ContactlistScreen(driver).logout();
+                new SplashScreen(driver);
+            }
+        }
