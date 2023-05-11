@@ -68,6 +68,10 @@ public class AuthenticationScreen extends BaseScreen{
         registrationButton.click();
         return this;
     }
+    public AuthenticationScreen submitRegistrationNegative(){
+        registrationButton.click();
+        return this;
+    }
     public AuthenticationScreen clean(){
         emailEditText.clear();
         passwordEditText.clear();

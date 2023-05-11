@@ -24,7 +24,7 @@ public class BaseScreen {
         element.clear();
         waitElement(element, 5);////////////падал логин тестс
         element.sendKeys(text);
-
+        driver.hideKeyboard();
     }
     public void pause(int time){
         try {
@@ -43,6 +43,17 @@ public class BaseScreen {
                 .until(ExpectedConditions.textToBePresentInElement(element, text));
 
     }
+
+public boolean isDisplayedWithException(MobileElement element){
+        try{
+        waitElement(element, 5);
+        return element.isDisplayed();
+} catch (Exception e){
+            return false;
+        }
+
+    }
+
 
 
  /*   public boolean isErrorMessageText(){
