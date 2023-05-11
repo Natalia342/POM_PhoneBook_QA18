@@ -4,6 +4,8 @@ import config.AppiumConfig;
 import models.Auth;
 import models.Contact;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import screens.AuthenticationScreen;
@@ -96,5 +98,10 @@ public class AddNewContactTests extends AppiumConfig {
                 .cleanline();
 
 
+    }
+    @AfterClass
+    public void postCondition() {
+        new ContactlistScreen(driver).logout();
+        new SplashScreen(driver);
     }
 }
