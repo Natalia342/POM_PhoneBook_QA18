@@ -18,8 +18,8 @@ public class AddNewContactTests extends AppiumConfig {
     public void preCondition(){
         new AuthenticationScreen(driver)
                 .login(Auth.builder()
-                        .email("vasiatal@gmail.com")
-                        .password("Vasia$1234")
+                        .email("natanaym@mail.ru")
+                        .password("$$Nn2412")
                         .build());
     }
     @Test
@@ -38,7 +38,8 @@ public class AddNewContactTests extends AppiumConfig {
         new ContactlistScreen(driver)
                 .openContactForm()
                 .fillContactForm(contact)
-                .submitContactForm();
+                .submitContactForm()
+                .isContactAdded(contact);
     }
     @Test
     public void addNewContactMustPositive(){
@@ -62,7 +63,7 @@ public class AddNewContactTests extends AppiumConfig {
     public void addNewContactNegativeEmptyAddress(){
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
-                .name("Must_"+ i)
+                .name("EmptyAddress"+ i)
                 .lastName("Positive")
                 .email("Must_"+ i + "@gmail.com")
                 .phone("18855799"+i)
@@ -74,8 +75,8 @@ public class AddNewContactTests extends AppiumConfig {
                 .openContactForm()
                 .fillContactForm(contact)
                 .submitContactFormNegative()
-                .isErrorMessageAddedContact("Error")
-                .cleanline();
+                .isErrorMessageAddedContact("Error");
+        //        .cleanline();
 
     }
     @Test
@@ -83,8 +84,8 @@ public class AddNewContactTests extends AppiumConfig {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
 
-                .lastName("Positive")
-                .email("Must_"+ i + "@gmail.com")
+                .lastName("EmptyName")
+                .email("EmptyName_"+ i + "@gmail.com")
                 .phone("18855799"+i)
                 .address("Kiev")
                 .description("friends")
@@ -94,8 +95,8 @@ public class AddNewContactTests extends AppiumConfig {
                 .openContactForm()
                 .fillContactForm(contact)
                 .submitContactFormNegative()
-                .isErrorMessageAddedContact("Error")
-                .cleanline();
+                .isErrorMessageAddedContact("Error");
+         //       .cleanline();
 
 
     }
