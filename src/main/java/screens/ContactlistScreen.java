@@ -5,14 +5,14 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import models.Contact;
-import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-import java.text.BreakIterator;
+import org.testng.Assert;
+import org.w3c.dom.css.Counter;
+
 import java.util.List;
 
 public class ContactlistScreen extends BaseScreen{
@@ -74,9 +74,10 @@ public class ContactlistScreen extends BaseScreen{
      //   }
         return new AddNewContactScreen(driver);
     }
-    public ContactlistScreen removeOneContact(){
+    public ContactlistScreen removeOneContact(int count){
         waitElement(plusButton,5);
-        MobileElement contact = contacts.get(0);
+        MobileElement contact = contacts.get(count);
+        int beforesize= contacts.size();
         Rectangle rect = contact.getRect();
 
         int xStart = rect.getX() + rect.getWidth() / 8;// 1.8 shirini
@@ -91,9 +92,33 @@ public class ContactlistScreen extends BaseScreen{
 
         waitElement(yesButton,5);
         yesButton.click();
+
+        pause(1000);
+        int aftersize = contacts.size();
+        Assert.assertEquals(beforesize-aftersize,1);
         return this;
 
     }
+    /*public ContactlistScreen isListSize(){
+        int before= contacts.size();
+        removeOneContact();
+        int after=contacts.size();;
+        //  MobileElement contact = contacts.get(0);
+
+        Assert.assertEquals(before-after,1);
+        return this;
+    }*/
+    public ContactlistScreen removeAllContact() {
+        pause(1000);
+
+        while (driver.findElements(By.xpath("//*[@resource-id='com.sheygam.contactapp:id/rowContainer']")).size()>0){
+            removeOneContact(0);
+
+        }
+        return this;
+    }
+
+
     public ContactlistScreen isContactAdded(Contact contact){
         boolean checkName = checkContainsText(nameList,
                 contact.getName() + " " + contact.getLastName());
@@ -127,6 +152,7 @@ public class ContactlistScreen extends BaseScreen{
 
         return new EditContactScreen(driver);
     }
+
 }
 
 

@@ -2,6 +2,7 @@ package tests;
 
 import config.AppiumConfig;
 import models.Auth;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,7 +21,16 @@ public class RemoveContactsTests extends AppiumConfig {
     }
     @Test
     public void removeOneContactPositive(){
-        new ContactlistScreen(driver).removeOneContact();
+        new ContactlistScreen(driver)
+                .removeOneContact(0);//Assert внутри
+              //  .isListSize()
+
+
+    }
+    @Test
+    public void removeAllContactPositive(){
+        new ContactlistScreen(driver)
+                .removeAllContact();
 
     }
     @AfterClass

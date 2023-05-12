@@ -18,8 +18,8 @@ public class AddNewContactTests extends AppiumConfig {
     public void preCondition(){
         new AuthenticationScreen(driver)
                 .login(Auth.builder()
-                        .email("natanaym@mail.ru")
-                        .password("$$Nn2412")
+                        .email("vasiatal@gmail.com")
+                        .password("Vasia$1234")
                         .build());
     }
     @Test
@@ -39,9 +39,10 @@ public class AddNewContactTests extends AppiumConfig {
                 .openContactForm()
                 .fillContactForm(contact)
                 .submitContactForm()
-                .isContactAdded(contact);
+                .isContactAdded(contact)
+                ;
     }
-    @Test
+    @Test(invocationCount = 3)
     public void addNewContactMustPositive(){
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
@@ -57,7 +58,8 @@ public class AddNewContactTests extends AppiumConfig {
         new ContactlistScreen(driver)
                 .openContactForm()
                 .fillContactForm(contact)
-                .submitContactForm();
+                .submitContactForm()
+                ;
     }
     @Test
     public void addNewContactNegativeEmptyAddress(){
