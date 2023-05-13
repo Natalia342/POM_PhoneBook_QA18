@@ -30,7 +30,7 @@ public class RemoveContactsTests extends AppiumConfig {
     @Test
     public void removeAllContactPositive(){
         new ContactlistScreen(driver)
-                .removeAllContact();
+                .removeAllContact();// Assert inside
 
     }
     @AfterClass

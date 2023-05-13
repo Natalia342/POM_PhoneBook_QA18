@@ -7,11 +7,9 @@ import io.appium.java_client.touch.offset.PointOption;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import org.testng.Assert;
-import org.w3c.dom.css.Counter;
 
 import java.util.List;
 
@@ -36,6 +34,9 @@ public class ContactlistScreen extends BaseScreen{
     @FindBy(id = "com.sheygam.contactapp:id/rowContainer")
     List<MobileElement> contacts;//список роав
 
+    @FindBy(id = "com.sheygam.contactapp:id/rowContainer")
+    MobileElement rov;
+
     @FindBy(id = "android:id/button1")
     MobileElement yesButton;
 
@@ -47,6 +48,11 @@ public class ContactlistScreen extends BaseScreen{
 
     @FindBy(id = "com.sheygam.contactapp:id/rowName")
     List<MobileElement>nameList;
+
+    @FindBy (id = "com.sheygam.contactapp:id/nameTxt")
+    MobileElement upDateName;
+    @FindBy(id = "com.sheygam.contactapp:id/emptyTxt")
+    MobileElement text;
 
     public boolean isContactListActivityPresent(){
 
@@ -110,11 +116,13 @@ public class ContactlistScreen extends BaseScreen{
     }*/
     public ContactlistScreen removeAllContact() {
         pause(1000);
+        if( isDisplayedWithException(rov))
 
         while (driver.findElements(By.xpath("//*[@resource-id='com.sheygam.contactapp:id/rowContainer']")).size()>0){
             removeOneContact(0);
 
         }
+        Assert.assertTrue(text.getText().equals("No Contacts. Add One more!"));
         return this;
     }
 
@@ -151,6 +159,14 @@ public class ContactlistScreen extends BaseScreen{
                 .perform();
 
         return new EditContactScreen(driver);
+    }
+    public ContactlistScreen isContactNameUpDate(Contact contact){
+        rov.click();
+        upDateName.click();
+        boolean checkName = checkContainsText(nameList,contact.getName());
+
+        Assert.assertTrue(checkName);
+        return this;
     }
 
 }

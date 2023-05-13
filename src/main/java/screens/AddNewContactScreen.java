@@ -68,5 +68,6 @@ public class AddNewContactScreen extends BaseScreen{
         driver.navigate().back();
         return this;
     }
+
 }
 

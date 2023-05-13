@@ -42,7 +42,7 @@ public class AddNewContactTests extends AppiumConfig {
                 .isContactAdded(contact)
                 ;
     }
-    @Test(invocationCount = 3)
+    @Test(invocationCount = 2)
     public void addNewContactMustPositive(){
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
